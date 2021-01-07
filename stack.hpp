@@ -10,11 +10,16 @@ using namespace std;
 
 extern stack<double> stos;
 
-void StackPush(double x);
-double StackPop();
-void StackPeek(int n);
-int StackSize();
-int Operation(string slowo);
+void StackPush(double x);       //funkcja umieszczająca element na stosie
+double StackPop();              //funkcja zdejmująca element ze stosu
+void StackPeek(int n);          //funkcja wypisująca zadaną ilość elementów stosu
+int StackSize();                //funkcja zwracająca zajęte miejsce na stosie
+
+///poniższe funkcje zwracają 0 jeśli wykonają się poprawnie, w przeciwnym razie -1
+
+int Operation(string slowo);    //funkcja obsługująca wpisane operacje
+
+//funkcje wykonująca działania matematyczne 
 int add();
 int sub();
 int mul();

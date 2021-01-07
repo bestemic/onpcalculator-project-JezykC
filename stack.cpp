@@ -5,9 +5,10 @@ std::stack<double> stos;
 int Operation(string slowo)
 {
     char* p;
-    double zmienna = strtod(slowo.c_str(), &p);
+    double zmienna = strtod(slowo.c_str(), &p);         //konwersja i sprawdzenie czy podane słowo jest liczbą
     if(*p)
     {
+        //jeśli nie liczba sprawdzenie czy to nazwa operacji i wykonanie niej
         if(slowo == "add")
         {
             return add();
@@ -108,7 +109,7 @@ int Operation(string slowo)
     }
     else 
     {
-        StackPush(zmienna);
+        StackPush(zmienna);     //jeśli liczba to wrzucenie jej na stos
         return 0;
     }
         
