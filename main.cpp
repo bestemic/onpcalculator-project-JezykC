@@ -21,7 +21,7 @@ void konw(string linia)
 int main(int argc, char *argv[]) 
 { 
     string linia;
-    if(argc==2)
+    if(argc==2)                              //obsługa jeśli dane podane w pliku
     {
         fstream plik;
         plik.open(argv[1]);
