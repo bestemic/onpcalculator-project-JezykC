@@ -53,12 +53,28 @@ int Operation(string slowo)
         {
             return exponenta();
         }
+        else if(slowo == "min")
+        {
+            return minimum();
+        }
+        else if(slowo == "max")
+        {
+            return maksimum();
+        }
+        else if(slowo == "gamma")
+        {
+            return gama();
+        }
+        else if(slowo == "bc")
+        {
+            return BinCoeff();
+        }
         else if(slowo == "?" || slowo == "h" || slowo == "help")
         {
             cout<<"Operacje arytmetyczne:"<<endl;
-            cout<<"add, sub, mul, div, pow, neg, abs, sin, cos, log, exp"<<endl;
+            cout<<"add, sub, mul, div, pow, neg, abs, sin, cos, log, exp, min, max, gamma, bc"<<endl;
             cout<<"Inne:"<<endl;
-            cout<<"?, h, help, q, quit, =, pstack"<<endl;
+            cout<<"?, h, help, q, quit, =, pstack, dup, exch"<<endl;
             return 0;
         }
         else if(slowo == "q" || slowo == "quit")
@@ -99,6 +115,14 @@ int Operation(string slowo)
                 StackPeek(StackSize());
                 return 0;
             }   
+        }
+        else if(slowo == "dup")
+        {
+            return dup();
+        }
+        else if(slowo == "exch")
+        {
+            return exch();
         }
         else
         {
@@ -368,3 +392,161 @@ int exponenta()
         return 0;
     }  
 }
+
+int minimum()
+{
+    double a, b;
+    if(StackSize()<2)
+    {
+        if(StackSize()==1) StackPeek(StackSize());
+        cout<<"Za malo elementow na stosie"<<endl;
+        return -1;
+    }
+    else
+    {
+        a = StackPop();
+        b = StackPop();
+        if(a<=b)
+        {
+            StackPush(a);
+        }
+        else StackPush(b);
+        return 0;
+    }
+    
+}
+
+int maksimum()
+{
+    double a, b;
+    if(StackSize()<2)
+    {
+        if(StackSize()==1) StackPeek(StackSize());
+        cout<<"Za malo elementow na stosie"<<endl;
+        return -1;
+    }
+    else
+    {
+        a = StackPop();
+        b = StackPop();
+        if(a>=b)
+        {
+            StackPush(a);
+        }
+        else StackPush(b);
+        return 0;
+    }
+    
+}
+
+int gama()
+{
+    double a;
+    if(StackSize()<1)
+    {
+        cout<<"Za malo elementow na stosie"<<endl;
+        return -1;
+    }
+    else
+    {
+        a = StackPop();
+        a = tgamma(a);
+        if(isnan(a)==1 || isinf(a)==1)
+        {
+            cout<<"Niepoprawne dane"<<endl;
+            return -1;
+        }
+        else
+        {
+            StackPush(a);
+            return 0; 
+        }     
+    }  
+}
+
+int BinCoeff() 
+{
+    double j = 1;
+    double a, b;
+    if(StackSize()<2)
+    {
+        if(StackSize()==1) StackPeek(StackSize());
+        cout<<"Za malo elementow na stosie"<<endl;
+        return -1;
+    }
+    else
+    {
+        b = StackPop();
+        a = StackPop();
+        if(a<b)
+        {
+            cout<<"Niepoprawne dane"<<endl;
+            StackPush(a);
+            StackPush(b);
+            StackPeek(StackSize());
+            return -1;
+        }
+        else
+        {
+            int i = a;
+	        if(b < a - b) {
+	            while(i >= a - b + 1) {
+		            j = j * i / (a - i + 1);
+		            i--;
+	            }
+    	    }
+	        else if(b >= a - b) {
+	            while(i >= b + 1) {
+	          	    j = j * i / (a - i + 1);
+		            i--;
+	            }
+    	    }
+        }
+        StackPush(j);
+        return 0;
+    }
+}
+
+int dup()
+{
+    double a;
+    if(StackSize()<1)
+    {
+        cout<<"Za malo elementow na stosie"<<endl;
+        return -1;
+    }
+    else
+    {
+        a = StackPop();
+        StackPush(a);
+        StackPush(a);
+        return 0;      
+    }  
+}
+
+int exch()
+{
+    double a, b;
+    if(StackSize()<2)
+    {
+        if(StackSize()==1) StackPeek(StackSize());
+        cout<<"Za malo elementow na stosie"<<endl;
+        return -1;
+    }
+    else
+    {
+        a = StackPop();
+        b = StackPop();
+        StackPush(a);
+        StackPush(b);
+        return 0;
+    }
+}
+
+
+
+
+
+
+
+

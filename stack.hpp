@@ -14,6 +14,8 @@ void StackPush(double x);       //funkcja umieszczająca element na stosie
 double StackPop();              //funkcja zdejmująca element ze stosu
 void StackPeek(int n);          //funkcja wypisująca zadaną ilość elementów stosu
 int StackSize();                //funkcja zwracająca zajęte miejsce na stosie
+int dup();
+int exch();
 
 ///poniższe funkcje zwracają 0 jeśli wykonają się poprawnie, w przeciwnym razie -1
 
@@ -31,5 +33,10 @@ int sinus();
 int cosinus();
 int logarytm();
 int exponenta();
+int minimum();
+int maksimum();
+int gama();
+int BinCoeff();
+
 
 #endif

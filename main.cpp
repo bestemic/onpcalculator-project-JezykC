@@ -1,27 +1,45 @@
 #include <iostream>  
 #include "stack.hpp"
 #include <sstream>
+#include <fstream>
 
 using namespace std; 
-  
-int main() 
-{ 
-    string linia, slowo;
-    
-    cout<<"Type '?', 'h' or 'help' for help."<<endl;
-    cout<<"["<<StackSize()<<"] ";
-    while(getline(cin, linia))          //pobieranie danych 
+
+void konw(string linia)
+{
+    string slowo;
+    istringstream iss(linia);       //dzielenie linni na poszczególne "słowa"
+    while(iss >> slowo)
     {
-        istringstream iss(linia);       //dzielenie linni na poszczególne "słowa"
-        while(iss >> slowo)
+        if(Operation(slowo)==-1)    //sprawdzenie czy podczas obsługi stosu nie pojawił się błąd
         {
-            if(Operation(slowo)==-1)    //sprawdzenie czy podczas obsługi stosu nie pojawił się błąd
-            {
-                break; 
-            }
+            break; 
         }
-        cout<<"["<<StackSize()<<"] ";
     }
-      
+}
+  
+int main(int argc, char *argv[]) 
+{ 
+    string linia;
+    if(argc==2)
+    {
+        fstream plik;
+        plik.open(argv[1]);
+        while(getline(plik, linia))          //pobieranie danych 
+        {
+            konw(linia);
+        }
+        plik.close();
+    }
+    else
+    {
+        cout<<"Type '?', 'h' or 'help' for help."<<endl;
+        cout<<"["<<StackSize()<<"] ";
+        while(getline(cin, linia))          //pobieranie danych 
+        {
+            konw(linia);
+            cout<<"["<<StackSize()<<"] ";
+        }  
+    }
     return 0; 
 }
